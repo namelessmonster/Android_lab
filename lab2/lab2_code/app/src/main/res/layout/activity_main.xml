@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dg123.helloworld.MainActivity">
+    tools:context="com.example.dg123.helloworld.MainActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/bg">
 
     <TextView
         android:id="@+id/headline"
@@ -20,8 +23,8 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:src="@mipmap/sysu"
         app:layout_constraintTop_toBottomOf="@+id/headline"
         app:layout_constraintLeft_toLeftOf="parent"
