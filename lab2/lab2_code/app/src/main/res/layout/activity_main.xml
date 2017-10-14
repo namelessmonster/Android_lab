@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dg123.helloworld.MainActivity">
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="@string/headline"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/sysu"
+        app:layout_constraintTop_toBottomOf="@+id/headline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:onClick="imageClick"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/usernameWrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/icon"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp">
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/user_hint"
+            android:textSize="18sp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordWrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/usernameWrapper"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp">
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:password="true"
+            android:hint="@string/pass_hint"
+            android:textSize="18sp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/passwordWrapper"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp">
+        <RadioButton
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/student"
+            android:textSize="18sp"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/student"
+            android:layout_marginLeft="10dp"
+            android:text="@string/teacher"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/button_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="@string/login"
+            android:background="@drawable/circle"
+            android:onClick="buttonClick"/>
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/login"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:text="@string/register"
+            android:background="@drawable/circle"
+            android:onClick="buttonClick"/>
+    </RadioGroup>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
