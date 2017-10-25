@@ -2,7 +2,10 @@ package com.example.dg123.shopping;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
+//import android.support.v4.app.ActivityCompatApi23;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,16 +57,24 @@ public class MainActivity extends AppCompatActivity {
         commonAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                Toast.makeText(MainActivity.this, "您点击了第" + position + "项",
-                        Toast.LENGTH_SHORT).show();
+                if (commonAdapter.tag == false) return;
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                intent.putExtra("name", commonAdapter.mDatas.get(position).get("name").toString());
+                intent.putExtra("type", commonAdapter.mDatas.get(position).get("type").toString());
+                intent.putExtra("price", commonAdapter.mDatas.get(position).get("price").toString());
+                intent.putExtra("info", commonAdapter.mDatas.get(position).get("info").toString());
+                intent.putExtra("pos", position);
+                startActivityForResult(intent, 1);
             }
-
             @Override
             public void onLongClick(final int position) {
+                if (commonAdapter.tag == false) return;
+                commonAdapter.tag = false;
                 commonAdapter.mDatas.remove(position);
                 commonAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "移除第" + position + "个商品",
                         Toast.LENGTH_SHORT).show();
+                commonAdapter.tag = true;
             }
         });
         mRecyclerView.setAdapter(commonAdapter);
@@ -71,15 +83,23 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0)
-                    Toast.makeText(MainActivity.this, "您点击了第" + position + "项",
-                            Toast.LENGTH_SHORT).show();
+                if (position == 0) return;
+                if (mListView.getTag().equals("1")) return;
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                intent.putExtra("name", listAdapter.goods.get(position).get("name").toString());
+                intent.putExtra("type", listAdapter.goods.get(position).get("type").toString());
+                intent.putExtra("price", listAdapter.goods.get(position).get("price").toString());
+                intent.putExtra("info", listAdapter.goods.get(position).get("info").toString());
+                intent.putExtra("pos", position);
+                startActivityForResult(intent, 1);
             }
         });
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 if (position == 0) return false;
+                if (mListView.getTag().equals("1")) return false;
+                mListView.setTag("1");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("移除商品");
                 builder.setMessage("从购物车移除" + listAdapter.goods.get(position).get("name").toString() + "?");
@@ -87,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        mListView.setTag("0");
                     }
                 });
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -95,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                         listAdapter.goods.remove(position);
                         listAdapter.notifyDataSetChanged();
+                        mListView.setTag("0");
                     }
                 });
                 builder.create().show();
@@ -141,6 +163,20 @@ public class MainActivity extends AppCompatActivity {
             fab.setTag("0");
             mRecyclerView.setVisibility(View.VISIBLE);
             mListView.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK){
+            Bundle extras = data.getExtras();
+            int pos = extras.getInt("pos");
+            if (mRecyclerView.getVisibility() == View.GONE){
+                listAdapter.goods.add(listAdapter.goods.get(pos));
+                listAdapter.notifyDataSetChanged();
+                return;
+            }
+            listAdapter.goods.add(commonAdapter.mDatas.get(pos));
+            listAdapter.notifyDataSetChanged();
         }
     }
 }

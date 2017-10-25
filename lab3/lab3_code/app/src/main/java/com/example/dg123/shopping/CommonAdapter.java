@@ -11,12 +11,14 @@ import java.util.Map;
 public abstract class CommonAdapter extends RecyclerView.Adapter<ViewHolder>{
     Context mContext;
     int mLayoutId;
+    boolean tag;
     List<Map<String, Object>> mDatas;
     OnItemClickListener mOnItemClickListener;
     public CommonAdapter(Context context, int layoutId, List<Map<String, Object>> datas){
         mContext = context;
         mLayoutId = layoutId;
         mDatas = datas;
+        tag = true;
     }
 
     public interface OnItemClickListener{
