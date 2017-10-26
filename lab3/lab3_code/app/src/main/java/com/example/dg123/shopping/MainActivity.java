@@ -31,7 +31,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private CommonAdapter commonAdapter;
-    private List<Map<String, Object>> listItems, shopItems;
+    public static List<Map<String, Object>> listItems;
+    public List<Integer> p1, p2;
     private Map<String, Object> map;
     private FloatingActionButton fab;
     private ListView mListView;
@@ -45,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         getList();
-        commonAdapter = new CommonAdapter(this, R.layout.goods_list_item, listItems) {
+        commonAdapter = new CommonAdapter(this, R.layout.goods_list_item, p1) {
             @Override
-            public void convert(ViewHolder holder, Map<String, Object> s){
+            public void convert(ViewHolder holder, int pos){
                 TextView name = holder.getView(R.id.name);
-                name.setText(s.get("name").toString());
+                name.setText(listItems.get(pos).get("name").toString());
                 TextView first = holder.getView(R.id.first);
-                first.setText(s.get("firstLetter").toString());
+                first.setText(listItems.get(pos).get("firstLetter").toString());
             }
         };
         commonAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
@@ -59,17 +60,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(int position) {
                 if (commonAdapter.tag == false) return;
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                intent.putExtra("name", commonAdapter.mDatas.get(position).get("name").toString());
-                intent.putExtra("type", commonAdapter.mDatas.get(position).get("type").toString());
-                intent.putExtra("price", commonAdapter.mDatas.get(position).get("price").toString());
-                intent.putExtra("info", commonAdapter.mDatas.get(position).get("info").toString());
-                intent.putExtra("pos", position);
+                intent.putExtra("name", listItems.get(commonAdapter.mDatas.get(position)).get("name").toString());
+                intent.putExtra("type", listItems.get(commonAdapter.mDatas.get(position)).get("type").toString());
+                intent.putExtra("price", listItems.get(commonAdapter.mDatas.get(position)).get("price").toString());
+                intent.putExtra("info", listItems.get(commonAdapter.mDatas.get(position)).get("info").toString());
+                intent.putExtra("pos", commonAdapter.mDatas.get(position));
+                intent.putExtra("tag", (Boolean) listItems.get(commonAdapter.mDatas.get(position)).get("tag"));
                 startActivityForResult(intent, 1);
             }
             @Override
             public void onLongClick(final int position) {
                 if (commonAdapter.tag == false) return;
                 commonAdapter.tag = false;
+                check(commonAdapter.mDatas.get(position));
                 commonAdapter.mDatas.remove(position);
                 commonAdapter.notifyDataSetChanged();
                 Toast.makeText(MainActivity.this, "移除第" + position + "个商品",
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(commonAdapter);
-        listAdapter = new ListAdapter(this, shopItems);
+        listAdapter = new ListAdapter(this, p2);
         mListView.setAdapter(listAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 0) return;
                 if (mListView.getTag().equals("1")) return;
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                intent.putExtra("name", listAdapter.goods.get(position).get("name").toString());
-                intent.putExtra("type", listAdapter.goods.get(position).get("type").toString());
-                intent.putExtra("price", listAdapter.goods.get(position).get("price").toString());
-                intent.putExtra("info", listAdapter.goods.get(position).get("info").toString());
-                intent.putExtra("pos", position);
+                intent.putExtra("name", listItems.get(listAdapter.goods.get(position)).get("name").toString());
+                intent.putExtra("type", listItems.get(listAdapter.goods.get(position)).get("type").toString());
+                intent.putExtra("price", listItems.get(listAdapter.goods.get(position)).get("price").toString());
+                intent.putExtra("info", listItems.get(listAdapter.goods.get(position)).get("info").toString());
+                intent.putExtra("pos", listAdapter.goods.get(position));
+                intent.putExtra("tag", (Boolean) listItems.get(listAdapter.goods.get(position)).get("tag"));
                 startActivityForResult(intent, 1);
             }
         });
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 mListView.setTag("1");
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("移除商品");
-                builder.setMessage("从购物车移除" + listAdapter.goods.get(position).get("name").toString() + "?");
+                builder.setMessage("从购物车移除" + listItems.get(listAdapter.goods.get(position)).get("name").toString() + "?");
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -126,29 +130,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void check(int pos){
+        int i = 1;
+        while (i < listAdapter.goods.size()){
+            if (listAdapter.goods.get(i).equals(pos)) listAdapter.goods.remove(i);
+            else ++i;
+        }
+        listAdapter.notifyDataSetChanged();
+    }
+
     public void getList(){
         listItems = new ArrayList<>();
+        p1 = new ArrayList<>();
+        p2 = new ArrayList<>();
         String[] goodsName = new String[]{"Enchated Forest", "Arla Milk", "Devondale Milk", "Kindle Oasis",
                 "waitrose 早餐麦片", "Mcvitie's 饼干", "Ferrero Rocher", "Maltesers", "Lindt", "Borggreve"};
         String[] goodsPrice = new String[]{"¥5.00", "¥59.00", "¥79.00", "¥2399.00", "¥179.00", "¥14.90",
                 "¥132.59", "¥141.43", "¥139.43", "¥28.90"};
         String[] goodsType = new String[]{"作者", "产地", "产地", "版本", "重量", "产地", "重量", "重量", "重量", "重量"};
         String[] goodsInfo = new String[]{"Johanna Basford", "德国", "澳大利亚", "8GB", "2Kg", "英国", "300g", "118g", "249g", "640g"};
-        for (int i=0;i<goodsName.length;++i){
+        map = new HashMap<>();
+        map.put("name", "购物车");
+        map.put("firstLetter", "*");
+        map.put("price", "价格");
+        map.put("tag", false);
+        listItems.add(map);
+        p2.add(0);
+        for (int i=1;i<goodsName.length;++i){
             map = new HashMap<>();
             map.put("name", goodsName[i]);
             map.put("price", goodsPrice[i]);
             map.put("type", goodsType[i]);
             map.put("info", goodsInfo[i]);
             map.put("firstLetter", goodsName[i].charAt(0));
+            map.put("tag", false);
             listItems.add(map);
+            p1.add(i);
         }
-        shopItems = new ArrayList<>();
-        map = new HashMap<>();
-        map.put("name", "购物车");
-        map.put("firstLetter", "*");
-        map.put("price", "价格");
-        shopItems.add(map);
     }
     public void fabClick(View view){
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -166,16 +184,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             int pos = extras.getInt("pos");
-            if (mRecyclerView.getVisibility() == View.GONE){
-                listAdapter.goods.add(listAdapter.goods.get(pos));
-                listAdapter.notifyDataSetChanged();
-                return;
+            int num = extras.getInt("num");
+            boolean tag = extras.getBoolean("tag");
+            listItems.get(pos).put("tag", tag);
+            for (int i=0;i<num;++i){
+                listAdapter.goods.add(pos);
             }
-            listAdapter.goods.add(commonAdapter.mDatas.get(pos));
             listAdapter.notifyDataSetChanged();
         }
     }

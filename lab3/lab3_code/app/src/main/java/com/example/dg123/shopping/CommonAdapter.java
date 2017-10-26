@@ -12,9 +12,9 @@ public abstract class CommonAdapter extends RecyclerView.Adapter<ViewHolder>{
     Context mContext;
     int mLayoutId;
     boolean tag;
-    List<Map<String, Object>> mDatas;
+    List<Integer> mDatas;
     OnItemClickListener mOnItemClickListener;
-    public CommonAdapter(Context context, int layoutId, List<Map<String, Object>> datas){
+    public CommonAdapter(Context context, int layoutId, List<Integer> datas){
         mContext = context;
         mLayoutId = layoutId;
         mDatas = datas;
@@ -30,7 +30,7 @@ public abstract class CommonAdapter extends RecyclerView.Adapter<ViewHolder>{
         mOnItemClickListener = onItemClickListener;
     }
 
-    public void convert(ViewHolder holder, Map<String, Object> data){};
+    public void convert(ViewHolder holder, int data){};
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){

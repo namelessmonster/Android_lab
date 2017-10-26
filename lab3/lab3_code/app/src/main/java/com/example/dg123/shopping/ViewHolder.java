@@ -18,11 +18,13 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         mConvertView = itemView;
         mViews = new SparseArray<View>();
     }
+
     public static ViewHolder get(Context context, ViewGroup parent, int layoutId){
         View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         ViewHolder holder = new ViewHolder(context, itemView, parent);
         return holder;
     }
+
     public <T extends View> T getView(int viewId){
         View view = mViews.get(viewId);
         if (view == null){

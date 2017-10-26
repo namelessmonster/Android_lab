@@ -15,9 +15,9 @@ import java.util.Map;
 
 public class ListAdapter extends BaseAdapter{
     public Context context;
-    public List<Map<String, Object>> goods;
+    public List<Integer> goods;
 
-    public ListAdapter(Context context, List<Map<String, Object>> goods){
+    public ListAdapter(Context context, List<Integer> goods){
         this.context = context;
         this.goods = goods;
     }
@@ -56,9 +56,9 @@ public class ListAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.first.setText(goods.get(i).get("firstLetter").toString());
-        viewHolder.name.setText(goods.get(i).get("name").toString());
-        viewHolder.price.setText(goods.get(i).get("price").toString());
+        viewHolder.first.setText(MainActivity.listItems.get(goods.get(i)).get("firstLetter").toString());
+        viewHolder.name.setText(MainActivity.listItems.get(goods.get(i)).get("name").toString());
+        viewHolder.price.setText(MainActivity.listItems.get(goods.get(i)).get("price").toString());
 
         return convertView;
 

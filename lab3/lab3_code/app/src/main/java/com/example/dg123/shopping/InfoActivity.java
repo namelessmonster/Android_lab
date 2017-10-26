@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InfoActivity extends AppCompatActivity{
@@ -21,10 +23,14 @@ public class InfoActivity extends AppCompatActivity{
     private Map<String, Integer> Id;
     String data;
     int pos;
+    int num;
+    boolean tag;
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_info);
+        tag = false;
+        num = 0;
         Id = new HashMap<>();
         Id.put("Enchated Forest", R.mipmap.enchatedforest);
         Id.put("Arla Milk", R.mipmap.arla);
@@ -39,6 +45,7 @@ public class InfoActivity extends AppCompatActivity{
         data = "";
         Bundle extras = getIntent().getExtras();
         pos = extras.getInt("pos");
+        tag = extras.getBoolean("tag");
         if (extras != null){
             data = extras.getString("name");
             textView = (TextView) findViewById(R.id.name);
@@ -54,28 +61,34 @@ public class InfoActivity extends AppCompatActivity{
             data = extras.getString("info");
             textView = (TextView) findViewById(R.id.info);
             textView.setText(data);
+            imageView = (ImageView) findViewById(R.id.star);
+            if (!tag) imageView.setImageResource(R.mipmap.empty_star);
+            else imageView.setImageResource(R.mipmap.full_star);
         }
     }
     public void starClick(View view){
         star = (ImageView) findViewById(R.id.star);
-        if (star.getTag().equals("0")){
+        if (!tag){
             star.setImageResource(R.mipmap.full_star);
-            star.setTag("1");
+            tag = true;
         }
         else{
             star.setImageResource(R.mipmap.empty_star);
-            star.setTag("0");
+            tag = false;
         }
     }
     public void backClick(View view){
-        finish();
-    }
-    public void carClick(View view){
         Bundle bundle = new Bundle();
         bundle.putInt("pos", pos);
+        bundle.putInt("num", num);
+        bundle.putBoolean("tag", tag);
         Intent intent = new Intent();
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
+        finish();
+    }
+    public void carClick(View view){
+        ++num;
         Toast.makeText(InfoActivity.this, "商品已添加到购物车",
                 Toast.LENGTH_SHORT).show();
     }
