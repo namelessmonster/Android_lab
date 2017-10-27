@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         map.put("tag", false);
         listItems.add(map);
         p2.add(0);
-        for (int i=1;i<goodsName.length;++i){
+        for (int i=0;i<goodsName.length;++i){
             map = new HashMap<>();
             map.put("name", goodsName[i]);
             map.put("price", goodsPrice[i]);
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             map.put("firstLetter", goodsName[i].charAt(0));
             map.put("tag", false);
             listItems.add(map);
-            p1.add(i);
+            p1.add(i+1);
         }
     }
     public void fabClick(View view){
