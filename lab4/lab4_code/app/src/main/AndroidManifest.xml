@@ -17,8 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InfoActivity"
-            android:launchMode="singleInstance">
+        <activity android:name=".InfoActivity">
         </activity>
         <receiver android:name=".StaticReceiver"
             android:exported="true">

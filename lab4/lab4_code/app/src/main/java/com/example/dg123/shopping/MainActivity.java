@@ -1,8 +1,10 @@
 package com.example.dg123.shopping;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 //import android.support.v4.app.ActivityCompatApi23;
@@ -22,6 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,19 +38,31 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private CommonAdapter commonAdapter;
     public static List<Map<String, Object>> listItems;
-    public List<Integer> p1, p2;
+    public static List<Integer> p1, p2;
     public static List<Integer> pic;
     private Map<String, Object> map;
     private FloatingActionButton fab;
     private ListView mListView;
     private ListAdapter listAdapter;
+    public static NotificationManager manager;
+    private Boolean tag;
+    private DynamicReceiver dynamicReceiver;
+    private IntentFilter dynamic_filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getList();
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mListView = (ListView) findViewById(R.id.list_view);
+        dynamicReceiver = new DynamicReceiver();
+        dynamic_filter = new IntentFilter();
+        dynamic_filter.addAction("DYNAMICATION");
+        registerReceiver(dynamicReceiver, dynamic_filter);
+        EventBus.getDefault().register(this);
+        tag = true;
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        getList();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commonAdapter = new CommonAdapter(this, R.layout.goods_list_item, p1) {
             @Override
@@ -61,12 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(int position) {
                 if (commonAdapter.tag == false) return;
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                intent.putExtra("name", listItems.get(commonAdapter.mDatas.get(position)).get("name").toString());
-                intent.putExtra("type", listItems.get(commonAdapter.mDatas.get(position)).get("type").toString());
-                intent.putExtra("price", listItems.get(commonAdapter.mDatas.get(position)).get("price").toString());
-                intent.putExtra("info", listItems.get(commonAdapter.mDatas.get(position)).get("info").toString());
                 intent.putExtra("pos", commonAdapter.mDatas.get(position));
-                intent.putExtra("tag", (Boolean) listItems.get(commonAdapter.mDatas.get(position)).get("tag"));
                 startActivityForResult(intent, 1);
             }
             @Override
@@ -90,12 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 0) return;
                 if (mListView.getTag().equals("1")) return;
                 Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                intent.putExtra("name", listItems.get(listAdapter.goods.get(position)).get("name").toString());
-                intent.putExtra("type", listItems.get(listAdapter.goods.get(position)).get("type").toString());
-                intent.putExtra("price", listItems.get(listAdapter.goods.get(position)).get("price").toString());
-                intent.putExtra("info", listItems.get(listAdapter.goods.get(position)).get("info").toString());
                 intent.putExtra("pos", listAdapter.goods.get(position));
-                intent.putExtra("tag", (Boolean) listItems.get(listAdapter.goods.get(position)).get("tag"));
                 startActivityForResult(intent, 1);
             }
         });
@@ -130,17 +137,30 @@ public class MainActivity extends AppCompatActivity {
         });
         initBroadcast();
     }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        super.onNewIntent(intent);
+        setIntent(intent);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mListView = (ListView) findViewById(R.id.list_view);
+        fab.setImageResource(R.mipmap.mainpage);
+        tag = false;
+        mRecyclerView.setVisibility(View.GONE);
+        mListView.setVisibility(View.VISIBLE);
+
+    }
     public void initBroadcast(){
         Random random = new Random();
         int pos = random.nextInt(10) + 1;
         Bundle bundle = new Bundle();
-        bundle.putString("name", listItems.get(pos).get("name").toString());
-        bundle.putString("price", listItems.get(pos).get("price").toString());
-        bundle.putInt("picture", pic.get(pos));
+        bundle.putInt("pos", pos);
         Intent intentBroadcast = new Intent("STATICATION");
         intentBroadcast.putExtras(bundle);
         sendBroadcast(intentBroadcast);
     }
+
     public void check(int pos){
         int i = 1;
         while (i < listAdapter.goods.size()){
@@ -192,32 +212,34 @@ public class MainActivity extends AppCompatActivity {
         pic.add(R.mipmap.borggreve);
     }
     public void fabClick(View view){
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (fab.getTag().equals("0")){
+        if (tag){
             fab.setImageResource(R.mipmap.mainpage);
-            fab.setTag("1");
+            tag = false;
             mRecyclerView.setVisibility(View.GONE);
             mListView.setVisibility(View.VISIBLE);
         }
         else{
             fab.setImageResource(R.mipmap.shoplist);
-            fab.setTag("0");
+            tag = true;
             mRecyclerView.setVisibility(View.VISIBLE);
             mListView.setVisibility(View.GONE);
         }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (resultCode == RESULT_OK){
-            Bundle extras = data.getExtras();
-            int pos = extras.getInt("pos");
-            int num = extras.getInt("num");
-            boolean tag = extras.getBoolean("tag");
-            listItems.get(pos).put("tag", tag);
-            for (int i=0;i<num;++i){
-                listAdapter.goods.add(pos);
-            }
-            listAdapter.notifyDataSetChanged();
-        }
+        if (resultCode == RESULT_OK){}
     }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event){
+        int pos = event.getMessage();
+        listAdapter.goods.add(pos);
+        listAdapter.notifyDataSetChanged();
+        Bundle bundle = new Bundle();
+        bundle.putInt("pos", pos);
+        Intent intentBroadcast = new Intent("DYNAMICATION");
+        intentBroadcast.putExtras(bundle);
+        sendBroadcast(intentBroadcast);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.dg123.shopping;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,35 +23,27 @@ public class InfoActivity extends AppCompatActivity{
     private ImageView star;
     private TextView textView;
     private ImageView imageView;
-    String data;
     int pos;
-    int num;
     boolean tag;
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_info);
         tag = false;
-        num = 0;
-        data = "";
         Bundle extras = getIntent().getExtras();
         pos = extras.getInt("pos");
-        tag = extras.getBoolean("tag");
+        tag = (Boolean) MainActivity.listItems.get(pos).get("tag");
         if (extras != null){
-            data = extras.getString("name");
             textView = (TextView) findViewById(R.id.name);
-            textView.setText(data);
+            textView.setText(MainActivity.listItems.get(pos).get("name").toString());
             imageView = (ImageView) findViewById(R.id.show);
             imageView.setImageResource(MainActivity.pic.get(pos));
-            data = extras.getString("type");
             textView = (TextView) findViewById(R.id.type);
-            textView.setText(data);
-            data = extras.getString("price");
+            textView.setText(MainActivity.listItems.get(pos).get("type").toString());
             textView = (TextView) findViewById(R.id.price);
-            textView.setText(data);
-            data = extras.getString("info");
+            textView.setText(MainActivity.listItems.get(pos).get("price").toString());
             textView = (TextView) findViewById(R.id.info);
-            textView.setText(data);
+            textView.setText(MainActivity.listItems.get(pos).get("info").toString());
             imageView = (ImageView) findViewById(R.id.star);
             if (!tag) imageView.setImageResource(R.mipmap.empty_star);
             else imageView.setImageResource(R.mipmap.full_star);
@@ -64,20 +59,15 @@ public class InfoActivity extends AppCompatActivity{
             star.setImageResource(R.mipmap.empty_star);
             tag = false;
         }
+        MainActivity.listItems.get(pos).put("tag", tag);
     }
     public void backClick(View view){
-        Bundle bundle = new Bundle();
-        bundle.putInt("pos", pos);
-        bundle.putInt("num", num);
-        bundle.putBoolean("tag", tag);
-        Intent intent = new Intent();
-        intent.putExtras(bundle);
-        setResult(RESULT_OK, intent);
+        setResult(RESULT_OK);
         finish();
     }
     public void carClick(View view){
-        ++num;
         Toast.makeText(InfoActivity.this, "商品已添加到购物车",
                 Toast.LENGTH_SHORT).show();
+        EventBus.getDefault().post(new MessageEvent(pos));
     }
 }
