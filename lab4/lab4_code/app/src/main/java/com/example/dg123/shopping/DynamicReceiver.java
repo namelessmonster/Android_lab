@@ -20,9 +20,11 @@ public class DynamicReceiver extends BroadcastReceiver{
         if (intent.getAction().equals("DYNAMICATION")){
             Bundle bundle = intent.getExtras();
             int pos = bundle.getInt("pos");
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), MainActivity.pic.get(pos));
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),
+                    MainActivity.pic.get(pos));
             Intent mainIntent = new Intent(context, MainActivity.class);
-            PendingIntent mainPendingIntent = PendingIntent.getActivity(context, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent mainPendingIntent = PendingIntent.getActivity(context, 0,
+                    mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             builder = new Notification.Builder(context);
             builder.setContentTitle("马上下单")
                     .setContentText(MainActivity.listItems.get(pos).get("name").toString() + "已添加到购物车")
