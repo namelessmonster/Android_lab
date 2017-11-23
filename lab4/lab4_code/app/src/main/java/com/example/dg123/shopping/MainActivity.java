@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.fab);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mListView = (ListView) findViewById(R.id.list_view);
+        //动态广播接收注册
         dynamicReceiver = new DynamicReceiver();
         dynamic_filter = new IntentFilter();
         dynamic_filter.addAction("DYNAMICATION");
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         mListView.setVisibility(View.VISIBLE);
 
     }
+    //静态广播发送
     public void initBroadcast(){
         Random random = new Random();
         int pos = random.nextInt(10) + 1;
