@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dg123.myapplication.MainActivity"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bottom_border_1_5">
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒计时: 01:00"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/problemType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单选题"
+        android:background="@drawable/problem_background"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+
+    <TextView
+        android:id="@+id/problem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/problemType"
+        app:layout_constraintTop_toTopOf="@id/problemType"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        android:text="\u3000\u3000\u3000三国演义的作者是谁?"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"/>
+
+    <TextView
+        android:id="@+id/itemA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/problem"
+        app:layout_constraintLeft_toLeftOf="@id/problemType"
+        android:layout_marginTop="30dp"
+        android:text="A"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:background="@drawable/option_background"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/descriptionA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/itemA"
+        app:layout_constraintLeft_toLeftOf="@id/itemA"
+        android:layout_marginTop="4dp"
+        android:text="\u3000\u3000\u0020罗贯中"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/itemB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/itemA"
+        app:layout_constraintLeft_toLeftOf="@id/itemA"
+        android:layout_marginTop="30dp"
+        android:text="B"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:background="@drawable/option_background"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/descriptionB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/itemB"
+        app:layout_constraintLeft_toLeftOf="@id/descriptionA"
+        android:layout_marginTop="4dp"
+        android:text="\u3000\u3000\u0020施耐庵"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/itemC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/itemB"
+        app:layout_constraintLeft_toLeftOf="@id/itemB"
+        android:layout_marginTop="30dp"
+        android:text="C"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:background="@drawable/option_background"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/descriptionC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/itemC"
+        app:layout_constraintLeft_toLeftOf="@id/descriptionB"
+        android:layout_marginTop="4dp"
+        android:text="\u3000\u3000\u0020吴承恩"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/itemD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/itemC"
+        app:layout_constraintLeft_toLeftOf="@id/itemC"
+        android:layout_marginTop="30dp"
+        android:text="D"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:background="@drawable/option_background"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/descriptionD"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/itemD"
+        app:layout_constraintLeft_toLeftOf="@id/descriptionC"
+        android:layout_marginTop="4dp"
+        android:text="\u3000\u3000\u0020曹雪芹"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"
+        android:clickable="true"
+        android:onClick="select"/>
+
+    <TextView
+        android:id="@+id/explain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/itemD"
+        app:layout_constraintTop_toBottomOf="@id/itemD"
+        android:layout_marginTop="40dp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="60dp">
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="50dp"
+            android:src="@mipmap/right"
+            />
+
+        <TextView
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/right_icon"
+            android:layout_alignBottom="@id/right_icon"
+            android:layout_marginLeft="5dp"
+            android:text="0"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/wrong_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/right_icon"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="100dp"
+            android:src="@mipmap/wrong"
+            />
+
+        <TextView
+            android:id="@+id/wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/wrong_icon"
+            android:layout_alignBottom="@id/wrong_icon"
+            android:layout_marginLeft="5dp"
+            android:text="0"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/solved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/wrong_icon"
+            android:layout_alignBottom="@id/wrong_icon"
+            android:layout_marginLeft="120dp"
+            android:text="0"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/top_border_1_5">
+
+        <ImageView
+            android:id="@+id/hero_icon"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-3dp"
+            android:layout_marginLeft="50dp"
+            android:src="@mipmap/hero"
+            />
+
+        <TextView
+            android:id="@+id/hero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/hero_icon"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:text="英雄"
+            android:textColor="@color/gray"
+            />
+
+        <ImageView
+            android:id="@+id/game_icon"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-3dp"
+            android:src="@mipmap/game"
+            android:onClick="reset"
+            />
+
+        <TextView
+            android:id="@+id/game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/game_icon"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="6dp"
+            android:text="游戏"
+            android:textColor="@color/red"
+            android:clickable="true"
+            android:onClick="reset"/>
+
+        <ImageView
+            android:id="@+id/community_icon"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="50dp"
+            android:src="@mipmap/community"
+            />
+
+        <TextView
+            android:id="@+id/community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@id/community_icon"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="1dp"
+            android:text="社区"
+            android:textColor="@color/gray"
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
