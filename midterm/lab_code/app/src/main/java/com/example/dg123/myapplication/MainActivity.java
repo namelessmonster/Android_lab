@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tv;
     private int[] option;
     private int[] answer;
     private int now;

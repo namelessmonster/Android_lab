@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dg123.myapplication.TableActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/hero_bg">
+
+    <RelativeLayout
+        android:id="@+id/hero_topBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bottom_border_1_5">
+
+        <ImageView
+            android:id="@+id/hero_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/back"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:onClick="back"/>
+
+        <TextView
+            android:id="@+id/hero_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="人物详情"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/hero_edit"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@mipmap/edit"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="22dp"
+            android:onClick="setEdit"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/hero_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="585dp"
+        android:layout_below="@id/hero_topBar">
+
+        <RelativeLayout
+            android:id="@+id/hero_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true">
+
+            <ImageView
+                android:id="@+id/hero_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/image_background"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                android:id="@+id/hero_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_image"
+                android:layout_alignLeft="@id/hero_image"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="名称"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/hero_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/hero_name"
+                android:layout_toRightOf="@id/hero_name"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="字"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/hero_lines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_name"
+                android:layout_alignLeft="@id/hero_name"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="40dp"
+                android:text="人物台词或描述"
+                android:textSize="18sp"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/hero_basic_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_lines"
+                android:layout_alignLeft="@id/hero_name"
+                android:layout_marginTop="40dp"
+                android:text="基本信息"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/hero_pot1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/hero_basic_info"
+                android:layout_below="@id/hero_basic_info"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/pot"/>
+
+            <TextView
+                android:id="@+id/hero_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/hero_pot1"
+                android:layout_below="@id/hero_basic_info"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:text="所属势力"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <ImageView
+                android:id="@+id/hero_add1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/hero_power"
+                android:layout_toRightOf="@id/hero_power"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/add" />
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_power"
+                android:layout_alignLeft="@id/hero_power"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:id="@+id/hero_recyclerview_power" />
+
+            <ImageView
+                android:id="@+id/hero_pot2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/hero_basic_info"
+                android:layout_below="@id/hero_recyclerview_power"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/pot"/>
+
+            <TextView
+                android:id="@+id/hero_life"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/hero_pot2"
+                android:layout_below="@id/hero_recyclerview_power"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:text="生卒年"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/hero_born"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_life"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="出生"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <EditText
+                android:id="@+id/hero_born_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_life"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="70dp"
+                android:hint="日期"
+                android:background="@null"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/hero_dead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_born"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="死亡"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <EditText
+                android:id="@+id/hero_dead_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_born"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="70dp"
+                android:background="@null"
+                android:hint="日期"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/hero_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_dead"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="寿命"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <EditText
+                android:id="@+id/hero_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_life"
+                android:layout_below="@id/hero_dead"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="70dp"
+                android:background="@null"
+                android:hint="年龄"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <ImageView
+                android:id="@+id/hero_pot3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@id/hero_basic_info"
+                android:layout_below="@id/hero_length"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/pot"/>
+
+            <TextView
+                android:id="@+id/hero_origin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/hero_pot1"
+                android:layout_below="@id/hero_length"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:text="籍贯"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/hero_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/hero_origin"
+                android:layout_below="@id/hero_origin"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:hint="地点"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:id="@+id/hero_property"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_address"
+                android:layout_alignLeft="@id/hero_name"
+                android:layout_marginTop="30dp"
+                android:text="人物属性"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/hero_add2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/hero_property"
+                android:layout_toRightOf="@id/hero_property"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/add" />
+
+            <TextView
+                android:id="@+id/hero_life_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_property"
+                android:layout_alignLeft="@id/hero_name"
+                android:layout_marginTop="30dp"
+                android:text="人物生平"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/hero_add3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/hero_life_content"
+                android:layout_toRightOf="@id/hero_life_content"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/add" />
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_life_content"
+                android:layout_alignLeft="@id/hero_life_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:id="@+id/hero_recyclerview_life" />
+
+            <TextView
+                android:id="@+id/hero_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_recyclerview_life"
+                android:layout_alignLeft="@id/hero_name"
+                android:layout_marginTop="30dp"
+                android:text="人物评价"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/hero_add4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/hero_comment"
+                android:layout_toRightOf="@id/hero_comment"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/add" />
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hero_comment"
+                android:layout_alignLeft="@id/hero_comment"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:id="@+id/hero_recyclerview_comment" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/hero_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/top_border_1_5">
+
+        <ImageView
+            android:id="@+id/hero_backto"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:src="@mipmap/backto" />
+
+        <ImageView
+            android:id="@+id/hero_love"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/love"
+            />
+
+        <ImageView
+            android:id="@+id/hero_forward"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="50dp"
+            android:src="@mipmap/forward"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
