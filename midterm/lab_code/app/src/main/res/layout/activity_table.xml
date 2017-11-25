@@ -186,16 +186,151 @@
                     android:src="@mipmap/add"
                     android:onClick="add_power"/>
 
-                <android.support.v7.widget.RecyclerView
+                <RelativeLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/power"
                     android:layout_alignLeft="@id/power"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
-                    android:id="@+id/recyclerview_power" />
+                    android:id="@+id/recyclerview_power" >
+
+                    <EditText
+                        android:id="@+id/power1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/date1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/power1"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/power2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power1"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/date2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power1"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/power2"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/power3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power2"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/date3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power2"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/power3"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/power4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power3"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/date4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power3"
+                        android:layout_toRightOf="@+id/power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/power5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/date5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/power5"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/pot2"
@@ -347,69 +482,301 @@
                     android:layout_alignBottom="@id/property"
                     android:layout_toRightOf="@id/property"
                     android:layout_marginLeft="10dp"
-                    android:src="@mipmap/add" />
+                    android:src="@mipmap/add"
+                    android:onClick="add_property"/>
+
+                <RelativeLayout
+                    android:id="@+id/property_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/property"
+                    android:layout_alignLeft="@id/property"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:id="@+id/pot4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="2.2dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot4"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property1"
+                        android:layout_alignLeft="@id/property1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/pot5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@id/property1"
+                        android:layout_marginTop="2.2dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot5"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property2"
+                        android:layout_alignLeft="@id/property2"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/pot6"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@id/property2"
+                        android:layout_marginTop="2.2dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot6"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property3"
+                        android:layout_alignLeft="@id/property3"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/pot7"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/value1"
+                        android:layout_alignLeft="@id/pot4"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="0dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot7"
+                        android:layout_below="@id/value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property4"
+                        android:layout_alignLeft="@id/property4"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/pot8"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/value1"
+                        android:layout_toRightOf="@id/property4"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot8"
+                        android:layout_below="@id/value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property5"
+                        android:layout_alignLeft="@id/property5"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/pot9"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/value1"
+                        android:layout_toRightOf="@id/property5"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/property6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/pot9"
+                        android:layout_below="@id/value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/value6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/property6"
+                        android:layout_alignLeft="@id/property6"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/life_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/property"
+                    android:layout_below="@id/property_num"
                     android:layout_alignLeft="@id/name"
                     android:layout_marginTop="30dp"
                     android:text="人物生平"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
-                <ImageView
-                    android:id="@+id/add3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@id/life_content"
-                    android:layout_toRightOf="@id/life_content"
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/add" />
-
-                <android.support.v7.widget.RecyclerView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/life_edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/life_content"
+                    android:layout_marginTop="20dp"
                     android:layout_alignLeft="@id/life_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/recyclerview_life" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@null"
+                    android:hint="人物生平"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/recyclerview_life"
+                    android:layout_below="@id/life_edit"
                     android:layout_alignLeft="@id/name"
                     android:layout_marginTop="30dp"
                     android:text="人物评价"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
-                <ImageView
-                    android:id="@+id/add4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@id/comment"
-                    android:layout_toRightOf="@id/comment"
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/add" />
-
-                <android.support.v7.widget.RecyclerView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/comment_edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/comment"
+                    android:layout_marginTop="20dp"
                     android:layout_alignLeft="@id/comment"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/recyclerview_comment" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@null"
+                    android:hint="人物评价"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray" />
+
 
             </RelativeLayout>
         </ScrollView>
@@ -435,7 +802,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true" />
 
-                <TextView
+                <EditText
                     android:id="@+id/hero_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -443,11 +810,12 @@
                     android:layout_alignLeft="@id/hero_image"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
-                    android:text="名称"
+                    android:hint="名称"
                     android:textSize="20sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:background="@null"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/hero_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -455,11 +823,12 @@
                     android:layout_toRightOf="@id/hero_name"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
-                    android:text="字"
+                    android:hint="字"
                     android:textSize="15sp"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray"
+                    android:background="@null"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/hero_lines"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -467,9 +836,10 @@
                     android:layout_alignLeft="@id/hero_name"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="40dp"
-                    android:text="人物台词或描述"
+                    android:hint="人物台词或描述"
                     android:textSize="18sp"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray"
+                    android:background="@null"/>
 
                 <TextView
                     android:id="@+id/hero_basic_info"
@@ -504,16 +874,151 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
-                <android.support.v7.widget.RecyclerView
+                <RelativeLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hero_power"
                     android:layout_alignLeft="@id/hero_power"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="30dp"
-                    android:id="@+id/hero_recyclerview_power" />
+                    android:id="@+id/hero_recyclerview_power" >
+
+                    <EditText
+                        android:id="@+id/hero_power1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_date1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/hero_power1"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_power2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power1"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_date2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power1"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/hero_power2"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_power3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power2"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_date3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power2"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/hero_power3"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_power4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power3"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_date4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power3"
+                        android:layout_toRightOf="@+id/hero_power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_power5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:hint="势力"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                    <EditText
+                        android:id="@+id/hero_date5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_power4"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/hero_power5"
+                        android:layout_marginLeft="30dp"
+                        android:hint="日期"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:visibility="gone"
+                        android:background="@null"/>
+
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/hero_pot2"
@@ -658,49 +1163,296 @@
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
+                <RelativeLayout
+                    android:id="@+id/hero_property_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/hero_property"
+                    android:layout_alignLeft="@id/hero_property"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:id="@+id/hero_pot4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="2.2dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot4"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property1"
+                        android:layout_alignLeft="@id/hero_property1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/hero_pot5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@id/hero_property1"
+                        android:layout_marginTop="2.2dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot5"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property2"
+                        android:layout_alignLeft="@id/hero_property2"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/hero_pot6"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@id/hero_property2"
+                        android:layout_marginTop="2.2dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot6"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="5dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property3"
+                        android:layout_alignLeft="@id/hero_property3"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/hero_pot7"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_alignLeft="@id/hero_pot4"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="0dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot7"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property4"
+                        android:layout_alignLeft="@id/hero_property4"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/hero_pot8"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_toRightOf="@id/hero_property4"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot8"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property5"
+                        android:layout_alignLeft="@id/hero_property5"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/hero_pot9"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_toRightOf="@id/hero_property5"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@mipmap/pot"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_property6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/hero_pot9"
+                        android:layout_below="@id/hero_value1"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="属性"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/hero_value6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hero_property6"
+                        android:layout_alignLeft="@id/hero_property6"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:hint="值"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"
+                        android:background="@null"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/hero_life_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/hero_property"
+                    android:layout_below="@id/hero_property_num"
                     android:layout_alignLeft="@id/hero_name"
                     android:layout_marginTop="30dp"
                     android:text="人物生平"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
-                <android.support.v7.widget.RecyclerView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/hero_life_edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hero_life_content"
+                    android:layout_marginTop="20dp"
                     android:layout_alignLeft="@id/hero_life_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/hero_recyclerview_life" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@null"
+                    android:hint="人物生平"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/hero_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/hero_recyclerview_life"
+                    android:layout_below="@id/hero_life_edit"
                     android:layout_alignLeft="@id/hero_name"
                     android:layout_marginTop="30dp"
                     android:text="人物评价"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
 
-                <android.support.v7.widget.RecyclerView
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/hero_comment_edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hero_comment"
+                    android:layout_marginTop="20dp"
                     android:layout_alignLeft="@id/hero_comment"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:id="@+id/hero_recyclerview_comment" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@null"
+                    android:hint="人物评价"
+                    android:textSize="18sp"
+                    android:textColor="@color/gray" />
 
             </RelativeLayout>
         </ScrollView>
