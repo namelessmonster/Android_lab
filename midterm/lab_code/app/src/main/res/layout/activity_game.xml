@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dg123.myapplication.MainActivity"
+    tools:context="com.example.dg123.myapplication.GameActivity"
     android:background="@color/white">
 
     <RelativeLayout
@@ -267,6 +267,7 @@
             android:layout_marginTop="-3dp"
             android:layout_marginLeft="50dp"
             android:src="@mipmap/hero"
+            android:onClick="backTo"
             />
 
         <TextView
@@ -279,6 +280,7 @@
             android:layout_marginLeft="6dp"
             android:text="英雄"
             android:textColor="@color/gray"
+            android:onClick="backTo"
             />
 
         <ImageView

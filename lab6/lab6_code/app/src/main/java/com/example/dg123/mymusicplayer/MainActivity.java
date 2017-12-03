@@ -1,12 +1,14 @@
 package com.example.dg123.mymusicplayer;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.icu.text.SimpleDateFormat;
@@ -15,6 +17,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Parcel;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public ObjectAnimator mMusicAnimation;
     private IBinder mBinder;
     private ServiceConnection mConnection;
+    private static boolean hasPermission;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+      "android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +68,13 @@ public class MainActivity extends AppCompatActivity {
         seekBar = (SeekBar) findViewById(R.id.seekbar);
         image = (ImageView) findViewById(R.id.image);
         mark = -1;
+        hasPermission = false;
         time = new SimpleDateFormat("mm:ss");
         mMusicAnimation =ObjectAnimator.ofFloat(image, "rotation", 0f,360f);
         mMusicAnimation.setDuration(15000);
         mMusicAnimation.setInterpolator(new LinearInterpolator());
         mMusicAnimation.setRepeatCount(-1);
+        verifyStoragePermissions(MainActivity.this);
 
         mConnection = new ServiceConnection() {
             @Override
@@ -195,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    mHandler.obtainMessage(mark).sendToTarget();
+                    if (mConnection != null && hasPermission == true)
+                        mHandler.obtainMessage(mark).sendToTarget();
                 }
             }
         };
@@ -213,5 +223,30 @@ public class MainActivity extends AppCompatActivity {
             mark = 103;
         else
             mark = 104;
+    }
+
+
+    public static void verifyStoragePermissions(Activity activity) {
+        try {
+            int permission = ActivityCompat.checkSelfPermission(activity, "android.permission.READ_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            }
+            else {
+                hasPermission = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            hasPermission = true;
+        } else {
+            hasPermission = false;
+            System.exit(0);
+        }
     }
 }

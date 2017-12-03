@@ -40,12 +40,15 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
     private ScrollView s2;
     private RelativeLayout r1;
     private RelativeLayout r2;
-    public List<Map<String, String>> power;
-    public List<Map<String, String>> property;
+    public Map<String, String> map;
     public List<Integer> powers;
     public List<Integer> propertys;
     public int power_pointer;
     public int property_pointer;
+    private ScrollView scrollView;
+    private  ScrollView heroScrollView;
+    private int Y;
+    private int heroY;
 
     private EditText ev;
     private EditText ev1;
@@ -57,17 +60,39 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
     private ImageView mImageView2;
     private Bitmap bitmap;
     private Bitmap image;
+    private String action;
+
 
     private static final int REQUEST_CODE_PICK_IMAGE=222;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
-
+        setupUI(findViewById(R.id.bg), 102);
+        setupUI(findViewById(R.id.hero_scrollview), 101);
         mButton1=((Button)findViewById(R.id.select));
         mImageView=((ImageView)findViewById(R.id.rect));
         mImageView2=((ImageView)findViewById(R.id.hero_image));
         mButton1.setOnClickListener(this);
+        scrollView = (ScrollView) findViewById(R.id.scrollview);
+        heroScrollView = (ScrollView) findViewById(R.id.hero_scrollview);
+        Y = heroY = 0;
+
+        Bundle extras = getIntent().getExtras();
+        action = extras.getString("action");
+        if (action.equals("view")){
+            map.put("name", extras.getString("name"));
+            map.put("nickname", extras.getString("nickname"));
+            map.put("lines", extras.getString("lines"));
+            map.put("power", extras.getString("power"));
+            map.put("born", extras.getString("born"));
+            map.put("dead", extras.getString("dead"));
+            map.put("origin", extras.getString("origin"));
+            map.put("property", extras.getString("property"));
+            map.put("life", extras.getString("life"));
+            map.put("comment", extras.getString("comment"));
+            getData();
+        }
 
         powers = new ArrayList<Integer>();
         powers.add(R.id.power1);
@@ -111,6 +136,15 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         propertys.add(R.id.pot9);
         propertys.add(R.id.property6);
         propertys.add(R.id.value6);
+        propertys.add(R.id.pot10);
+        propertys.add(R.id.property7);
+        propertys.add(R.id.value7);
+        propertys.add(R.id.pot11);
+        propertys.add(R.id.property8);
+        propertys.add(R.id.value8);
+        propertys.add(R.id.pot12);
+        propertys.add(R.id.property9);
+        propertys.add(R.id.value9);
         propertys.add(R.id.hero_pot4);
         propertys.add(R.id.hero_property1);
         propertys.add(R.id.hero_value1);
@@ -129,6 +163,15 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         propertys.add(R.id.hero_pot9);
         propertys.add(R.id.hero_property6);
         propertys.add(R.id.hero_value6);
+        propertys.add(R.id.hero_pot10);
+        propertys.add(R.id.hero_property7);
+        propertys.add(R.id.hero_value7);
+        propertys.add(R.id.hero_pot11);
+        propertys.add(R.id.hero_property8);
+        propertys.add(R.id.hero_value8);
+        propertys.add(R.id.hero_pot12);
+        propertys.add(R.id.hero_property9);
+        propertys.add(R.id.hero_value9);
         property_pointer = 0;
 
         mark = false;
@@ -137,10 +180,6 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         s2 = (ScrollView) findViewById(R.id.hero_scrollview);
         r2 = (RelativeLayout) findViewById(R.id.hero_bottomBar);
         imm =  (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        setupUI(findViewById(R.id.bg));
-
-        power = new ArrayList<Map<String, String>>();
-        property = new ArrayList<Map<String, String>>();
 
         mHandler = new Handler() {
             private ImageView iv;
@@ -149,19 +188,29 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
                     iv = (ImageView) findViewById(R.id.edit);
-                    if (mark) {
+                    if (mark)
                         iv.setImageResource(R.mipmap.edit_red);
-                        setupUI(findViewById(R.id.bg));
-                    } else {
+                    else
                         iv.setImageResource(R.mipmap.edit);
-                        setupUI(findViewById(R.id.bg));
-                    }
-                    inputable(findViewById(R.id.bg));
+                }
+                else if (msg.what == 2){
+                    r1.setVisibility(View.GONE);
+                }
+                else if (msg.what == 3){
+                    r1.setVisibility(View.VISIBLE);
+                }
+                else if (msg.what == 4) {
+                    r2.setVisibility(View.GONE);
+                }
+                else if (msg.what == 5) {
+                    r2.setVisibility(View.VISIBLE);
                 }
             }
         };
         mThead = new Thread(new Runnable() {
             private boolean nmark;
+            private int ny;
+            private int heroNy;
             @Override
             public void run() {
                 while (true) {
@@ -170,6 +219,21 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    ny = scrollView.getScrollY();
+                    heroNy = heroScrollView.getScrollY();
+                    if (ny > Y)
+                        mHandler.obtainMessage(2).sendToTarget();
+                    else if (ny < Y - 30)
+                        mHandler.obtainMessage(3).sendToTarget();
+
+                    Y = ny;
+                    if (heroNy > heroY)
+                        mHandler.obtainMessage(4).sendToTarget();
+                    else if (heroNy < heroY - 30)
+                        mHandler.obtainMessage(5).sendToTarget();
+                    heroY = heroNy;
+
                     if (mark != nmark){
                         nmark = mark;
                         mHandler.obtainMessage(1).sendToTarget();
@@ -180,7 +244,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         mThead.start();
     }
 
-    private void setupUI(final View view) {
+    private void setupUI(final View view, int code) {
         //Set up touch listener for non-text box views to hide keyboard.
         if(!(view instanceof EditText)) {
             view.setOnTouchListener(new View.OnTouchListener() {
@@ -189,7 +253,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
                         imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(),
                                 0);
                     }
-                    r1.setVisibility(View.VISIBLE);
+
                     return false;
                 }
             });
@@ -200,16 +264,17 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
                     return false;
                 }
             });
-
-            ev = (EditText) findViewById(view.getId());
-            ev.setEnabled(false);
+            if (code == 101) {
+                ev = (EditText) findViewById(view.getId());
+                ev.setEnabled(false);
+            }
         }
 
         //If a layout container, iterate over children and seed recursion.
         if (view instanceof ViewGroup) {
             for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
                 View innerView = ((ViewGroup) view).getChildAt(i);
-                setupUI(innerView);
+                setupUI(innerView, code);
             }
         }
     }
@@ -231,30 +296,84 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void inputable(View view) {
-        if(view instanceof EditText) {
-            ev = (EditText) findViewById(view.getId());
-            ev.setEnabled(mark);
-        }
-        if (view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                View innerView = ((ViewGroup) view).getChildAt(i);
-                inputable(innerView);
-            }
-        }
-    }
-
     public void back(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("action", action);
+        ev = (EditText) findViewById(R.id.hero_name);
+        bundle.putString("name", ev.getText().toString());
+        ev = (EditText) findViewById(R.id.hero_nickname);
+        bundle.putString("nickname", ev.getText().toString());
+        ev = (EditText) findViewById(R.id.hero_lines);
+        bundle.putString("lines", ev.getText().toString());
+        String s = "";
+        for (int i=10;i<20;i+=2) {
+            ev = (EditText) findViewById(powers.get(i));
+            if (ev.getVisibility() == View.GONE) break;
+            s += ev.getText().toString();
+            ev = (EditText) findViewById(powers.get(i+1));
+            s += ":";
+            if (ev.getVisibility() != View.GONE)
+                s += ev.getText().toString();
+            s += ";";
+        }
+        s = s.substring(0, s.length()-1);
+        bundle.putString("power", s);
+        ev = (EditText) findViewById(R.id.hero_born_date);
+        bundle.putString("born", ev.getText().toString());
+        ev = (EditText) findViewById(R.id.hero_dead_date);
+        bundle.putString("dead", ev.getText().toString());
+        s = "";
+        for (int i=27;i<54;i+=3) {
+            ev = (EditText) findViewById(powers.get(i+1));
+            if (ev.getVisibility() == View.GONE) break;
+            s += ev.getText().toString();
+            ev = (EditText) findViewById(powers.get(i+2));
+            s += ":";
+            if (ev.getVisibility() != View.GONE)
+                s += ev.getText().toString();
+            s += ";";
+        }
+        s = s.substring(0, s.length()-1);
+        bundle.putString("property", s);
+        ev = (EditText) findViewById(R.id.hero_life_edit);
+        bundle.putString("life", ev.getText().toString());
+
+        ev = (EditText) findViewById(R.id.hero_comment_edit);
+        bundle.putString("comment", ev.getText().toString());
+
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
-    public void ok(View view) {
-        mark = false;
-        s2.setVisibility(View.VISIBLE);
-        s1.setVisibility(View.GONE);
-        r2.setVisibility(View.VISIBLE);
-        r1.setVisibility(View.GONE);
-        updateData();
+    public void ok(final View view) {
+        if (check()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(TableActivity.this);
+            builder.setTitle("确认修改？");
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    updateData();
+                    mark = false;
+                    s2.setVisibility(View.VISIBLE);
+                    s1.setVisibility(View.GONE);
+                    r2.setVisibility(View.VISIBLE);
+                    r1.setVisibility(View.GONE);
+                    if (action.equals("add"))
+                        back(view);
+                }
+            });
+            builder.create().show();
+        } else
+            Toast.makeText(TableActivity.this, "名字不能为空", Toast.LENGTH_SHORT).show();
     }
 
     public void no(View view) {
@@ -263,6 +382,15 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         s1.setVisibility(View.GONE);
         r2.setVisibility(View.VISIBLE);
         r1.setVisibility(View.GONE);
+        if (action.equals("add"))
+            back(view);
+    }
+
+    public boolean check() {
+        ev = (EditText) findViewById(R.id.name);
+        if (ev.getText().toString().length() == 0)
+            return false;
+        return true;
     }
 
     public void loadData() {
@@ -283,7 +411,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             ev = (EditText) findViewById(powers.get(i));
             ev1 = (EditText) findViewById(powers.get(i+1));
             if (ev.getVisibility() == View.GONE) break;
-            if (ev.getText().toString().length() > 0 && ev1.getText().toString().length() > 0) {
+            if (ev.getText().toString().length() > 0) {
                 ev1 = (EditText) findViewById(powers.get(j));
                 ev1.setText(ev.getText());
                 ev1.setVisibility(View.VISIBLE);
@@ -315,8 +443,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         ev1 = (EditText) findViewById(R.id.hero_address);
         ev.setText(ev1.getText());
         j = 0;
-
-        for (int i=18;i<36;i+=3) {
+        for (int i=27;i<54;i+=3) {
             ev = (EditText) findViewById(propertys.get(i+1));
             ev1 = (EditText) findViewById(propertys.get(i+2));
             if (ev.getVisibility() == View.GONE) break;
@@ -336,7 +463,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         property_pointer = j;
-        while (j < 18) {
+        while (j < 27) {
             iv = (ImageView) findViewById(propertys.get(j));
             iv.setVisibility(View.GONE);
             ++j;
@@ -377,7 +504,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             ev = (EditText) findViewById(powers.get(i));
             ev1 = (EditText) findViewById(powers.get(i+1));
             if (ev.getVisibility() == View.GONE) break;
-            if (ev.getText().toString().length() > 0 && ev1.getText().toString().length() > 0) {
+            if (ev.getText().toString().length() > 0) {
                 ev1 = (EditText) findViewById(powers.get(j));
                 ev1.setText(ev.getText());
                 ev1.setVisibility(View.VISIBLE);
@@ -385,7 +512,8 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
                 ev = (EditText) findViewById(powers.get(i+1));
                 ev1 = (EditText) findViewById(powers.get(j));
                 ev1.setText(ev.getText());
-                ev1.setVisibility(View.VISIBLE);
+                if (ev1.getText().toString().length() > 0) ev1.setVisibility(View.VISIBLE);
+                else ev1.setVisibility(View.GONE);
                 ++j;
             }
         }
@@ -408,8 +536,8 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
         ev1 = (EditText) findViewById(R.id.hero_address);
         ev1.setText(ev.getText());
 
-        j = 18;
-        for (int i=0;i<18;i+=3) {
+        j = 27;
+        for (int i=0;i<27;i+=3) {
             ev = (EditText) findViewById(propertys.get(i+1));
             ev1 = (EditText) findViewById(propertys.get(i+2));
             if (ev.getVisibility() == View.GONE) break;
@@ -428,7 +556,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
                 ++j;
             }
         }
-        while (j < 36) {
+        while (j < 54) {
             iv = (ImageView) findViewById(propertys.get(j));
             iv.setVisibility(View.GONE);
             ++j;
@@ -462,7 +590,7 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void add_property(View view) {
-        if (property_pointer < 18) {
+        if (property_pointer < 27) {
             iv = (ImageView) findViewById(propertys.get(property_pointer));
             iv.setVisibility(View.VISIBLE);
             ++property_pointer;
@@ -512,6 +640,68 @@ public class TableActivity extends AppCompatActivity implements View.OnClickList
             default:
                 break;
         }
+    }
+
+    public void love(View v) {
+        iv = (ImageView) findViewById(R.id.hero_love);
+        if (iv.getTag().toString().equals("0")){
+            iv.setImageResource(R.mipmap.loved);
+            iv.setTag("1");
+        } else {
+            iv.setImageResource(R.mipmap.love);
+            iv.setTag("0");
+        }
+    }
+
+    public void getData() {
+        ev = (EditText) findViewById(R.id.name);
+        ev.setText(map.get("hero_name"));
+        ev = (EditText) findViewById(R.id.nickname);
+        ev.setText(map.get("hero_nickname"));
+        ev = (EditText) findViewById(R.id.lines);
+        ev.setText(map.get("hero_lines"));
+        String[] power = map.get("hero_power").split(";");
+        String[] item;
+        int j = 10;
+        for (int i=0;i<power.length;++i) {
+            item = power[i].split(":");
+            ev = (EditText) findViewById(powers.get(j));
+            ev.setText(item[0]);
+            ev.setVisibility(View.VISIBLE);
+            ++j;
+            ev = (EditText) findViewById(powers.get(j));
+            ev.setText(item[1]);
+            ev.setVisibility(View.VISIBLE);
+            ++j;
+        }
+        ev = (EditText) findViewById(R.id.hero_born_date);
+        ev.setText(map.get("born"));
+        ev = (EditText) findViewById(R.id.hero_dead_date);
+        ev.setText(map.get("dead"));
+
+        j = 27;
+        String[] property = map.get("prperty").split(";");
+        for (int i=0;i<property.length;++i) {
+            item = property[i].split(":");
+            iv = (ImageView) findViewById(propertys.get(j));
+            iv.setVisibility(View.VISIBLE);
+            ++j;
+            ev = (EditText) findViewById(propertys.get(j));
+            ev.setText(item[0]);
+            ev.setVisibility(View.VISIBLE);
+            ++j;
+            ev = (EditText) findViewById(propertys.get(j));
+            ev.setText(item[1]);
+            ev.setVisibility(View.VISIBLE);
+            ++j;
+        }
+
+        ev = (EditText) findViewById(R.id.hero_life_edit);
+        ev.setText(map.get("life"));
+
+        ev = (EditText) findViewById(R.id.hero_comment_edit);
+        ev.setText(map.get("comment"));
+
     }
 
 }

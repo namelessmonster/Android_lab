@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private int[] option;
     private int[] answer;
@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
+        Bundle extras = getIntent().getExtras();
         total = 1000;
         answer = new int[total];
         option = new int[8];
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     if (s.length() == 1) s = "0" + s;
                     tv.setText("倒计时: 00:" + s);
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
                     builder.setTitle("您的成绩是" + String.valueOf(right) + "题");
                     builder.setNegativeButton("回到界面", new DialogInterface.OnClickListener() {
                         @Override
@@ -201,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             ++now;
         }
         if (wrong == 5) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
             builder.setTitle("您的成绩是" + String.valueOf(right) + "题");
             builder.setNegativeButton("回到界面", new DialogInterface.OnClickListener() {
                 @Override
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void reset(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setTitle("开始新游戏");
         builder.setMessage("超时或错5题判输");
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -234,6 +235,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 init();
+            }
+        });
+        builder.create().show();
+    }
+
+    public void backTo(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+        builder.setTitle("是否退出游戏");
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
             }
         });
         builder.create().show();
