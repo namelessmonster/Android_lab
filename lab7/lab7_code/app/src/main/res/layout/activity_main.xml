@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dg123.lab7_code.MainActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/first"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/first_new_password"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="New Password"/>
+
+        <EditText
+            android:id="@+id/first_confirm_password"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_new_password"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Confirm Password"/>
+
+        <Button
+            android:id="@+id/first_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/first_new_password"
+            app:layout_constraintTop_toBottomOf="@id/first_confirm_password"
+            android:layout_marginTop="10dp"
+            android:text="OK"
+            android:onClick="buttonClick"/>
+
+        <Button
+            android:id="@+id/first_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/first_ok"
+            app:layout_constraintTop_toBottomOf="@id/first_confirm_password"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="CLEAR"
+            android:onClick="buttonClick"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/second"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/second_password"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Password"/>
+
+        <Button
+            android:id="@+id/second_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/second_password"
+            app:layout_constraintTop_toBottomOf="@id/second_password"
+            android:layout_marginTop="10dp"
+            android:text="OK"
+            android:onClick="buttonClick"/>
+
+        <Button
+            android:id="@+id/second_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/second_ok"
+            app:layout_constraintTop_toBottomOf="@id/second_password"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="CLEAR"
+            android:onClick="buttonClick"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
