@@ -50,13 +50,13 @@ public class MusicService extends Service{
                 mp.seekTo(data.readInt());
             else{                  //初始化音乐播放器
                 try{
-                    /*
+
                     AssetManager am = getAssets();
                     AssetFileDescriptor afd = am.openFd("melt.mp3");
                     mp.setDataSource(afd.getFileDescriptor(),
                             afd.getStartOffset(), afd.getLength());
-                    */
-                    mp.setDataSource(Environment.getExternalStorageDirectory() + "/melt.mp3");
+
+                    //mp.setDataSource(Environment.getExternalStorageDirectory() + "/melt.mp3");
                     mp.prepare();
                     mp.setLooping(true);
                     reply.writeInt(mp.getDuration());
