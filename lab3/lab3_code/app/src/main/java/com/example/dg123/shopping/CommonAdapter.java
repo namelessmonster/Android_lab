@@ -60,5 +60,4 @@ public abstract class CommonAdapter extends RecyclerView.Adapter<ViewHolder>{
 
     @Override
     public int getItemCount(){return mDatas.size();}
-
 }
