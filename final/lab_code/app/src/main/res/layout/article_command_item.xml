@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/article_commanditem_icon"
+        android:scaleType="centerCrop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:id="@+id/article_commanditem_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:text="Amane"
+        android:textSize="15sp"
+        android:textColor="@color/article_commanditem_namecolor" />
+
+    <TextView
+        android:id="@+id/article_commanditem_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2小时前"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/article_commanditem_username"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/article_commanditem_commandtext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Happy New Year"
+        android:textSize="15sp"
+        android:textColor="@color/article_commanditem_textcolor"
+        app:layout_constraintTop_toBottomOf="@id/article_commanditem_username"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="10dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/article_commanditem_commandreplylayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_commanditem_commandtext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/article_command_item_replycommand_background"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/article_commanditem_commandreplylayout_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="ODA"
+            android:textColor="@color/article_commanditem_namecolor"/>
+
+        <TextView
+            android:id="@+id/article_commanditem_commandreplylayout_submittime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-12-31"
+            app:layout_constraintLeft_toRightOf="@id/article_commanditem_commandreplylayout_username"
+            android:layout_marginLeft="5dp"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/article_commanditem_commandreplylayout_commandtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Happy New Year"
+            android:textSize="15sp"
+            android:textColor="@color/article_commanditem_textcolor"
+            app:layout_constraintTop_toBottomOf="@id/article_commanditem_commandreplylayout_username" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/comment_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_commanditem_commandreplylayout"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:text="回复" />
+
+    <View
+        android:id="@+id/article_contentview_blankline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/article_commanditem_blanklinecolor"
+        app:layout_constraintTop_toBottomOf="@id/comment_reply"
+        android:layout_marginTop="5dp"/>
+
+</android.support.constraint.ConstraintLayout>
